@@ -8,7 +8,9 @@ public enum eState
 {
     Idle,
     Chasing,
+    Angry,
     Attacking,
+    Ready,
     Die
 }
 public class Enemy : MonoBehaviour
@@ -16,26 +18,32 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent agent;
     private Transform target;
     private eState currentState;
-    bool isTure;
+    private Animator ani;
     public System.Action OnEnalbe;
+   
+    float distance;
+    float maxDistance = Mathf.Pow(5,2);
+    float attackDistance = Mathf.Pow(2.5f, 2);
 
+    public bool isAttacking = false;
+    public bool isReadying = false;
+    public bool isChasing = false;
+    public bool isIdleing = false;
+    public bool isAngry = false;
     void Start()
     {
-        
-        this.currentState = eState.Chasing;
+        this.ani = this.GetComponent<Animator>();
         this.agent = this.GetComponent<NavMeshAgent>();
+
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
             this.target = GameObject.FindGameObjectWithTag("Player").transform;
         }
-
     }
     void Update()
     {
         this.ChangeStae(this.currentState);
     }
-
-
 
     void ChangeStae(eState state)
     {
@@ -43,40 +51,58 @@ public class Enemy : MonoBehaviour
         {
             case eState.Idle:
                 {
-                   
+                    this.agent.isStopped = false;
+                    this.PlayeAnimation(eState.Chasing, isChasing = true ,  "Run");
                 }
                 break;
             case eState.Chasing:
                 {
+                    isIdleing = false;
                     if (this.target != null)
                     {
-                        agent.isStopped = false;
+                        this.agent.SetDestination(this.target.position);
 
-                        agent.SetDestination(this.target.position);
-
-                        var dir = (this.target.transform.position - this.gameObject.transform.position).sqrMagnitude;
-                        if (dir < Mathf.Pow(3, 2))
+                        if (CalculateDistance())
                         {
-                            Debug.Log("test");
-                            this.currentState = eState.Attacking;
-                          
+                            this.agent.isStopped = true;
+                            this.PlayeAnimation(eState.Attacking, isAttacking = true, "Attack01");
                         }
                     }
                 }
                 break;
+            case eState.Angry:
+                {
+           
+                    this.isReadying = false;
+                    this.agent.speed = 4;
+                    
+                    this.agent.isStopped = false;
+                    this.agent.SetDestination(this.target.position);
+
+                    if (CalculateMaxDistance() < Mathf.Pow(3.5f, 2))
+                    {
+                        this.agent.isStopped = true;
+                        this.ani.speed = 1;
+                        this.PlayeAnimation(eState.Attacking, isAttacking = true, "Attack01");
+                    }
+
+                }
+                break;
+            case eState.Ready:
+                {
+
+                }
+                break;
             case eState.Attacking:
                 {
-                    this.Attack();
-
-                    var dir = (this.target.transform.position - this.gameObject.transform.position).sqrMagnitude;
-                    if (dir > Mathf.Pow(3, 2))
+                    isChasing = false;
+                    if(!isAttacking)
                     {
-                        Debug.Log("test");
-                        this.currentState = eState.Chasing;
-
+                        this.PlayeAnimation(eState.Ready, isReadying = true, "Shout");
                     }
                 }
                 break;
+
             case eState.Die:
                 {
 
@@ -85,27 +111,58 @@ public class Enemy : MonoBehaviour
         }
     }
 
-   
-    private void OnCollisionEnter(Collision collision)
+    public void OnShoutFinished()
     {
-        if(collision.gameObject.tag == "Player")
+       this.PlayeAnimation(eState.Angry, isAngry = true, "Run");
+    }
+
+   public void OnAttack01_Finished()
+    {
+        if (CalculateDistance())
         {
-            agent.speed = 1;
-            Debug.Log("test");
-            isTure = true;
+            Debug.Log("플레이어가 데미지를 받았다");
+        }
+        else
+        {
+            this.ani.SetTrigger("Attack01_01");
         }
     }
 
-
-    //Test
-    void Attack()
+    public void OnAttack01_01_Finished()
     {
-        agent.isStopped = true;
-
-        if (Input.GetKeyDown(KeyCode.P))
+        if (CalculateDistance())
         {
-            WeaponMove weaponMove = this.gameObject.GetComponentInChildren<WeaponMove>();
-            weaponMove.Attack();
+            Debug.Log("플레이어가 데미지를 받았다");
         }
+        isAttacking = false;
+    }
+
+    void PlayeAnimation(eState state ,bool a, string name = null)
+    {
+        this.currentState = state;
+
+        if(name != null)
+        {
+            this.ani.SetTrigger(name.ToString());
+        }
+
+    }
+
+    bool CalculateDistance()
+    {
+        float toTargetDistance = (this.target.transform.position - this.transform.position).sqrMagnitude;
+
+        return toTargetDistance < this.attackDistance;
+    }
+
+    float CalculateMaxDistance()
+    {
+        this.distance = (this.target.transform.position - this.transform.position).sqrMagnitude;
+        return distance;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
     }
 }

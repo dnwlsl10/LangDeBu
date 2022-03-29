@@ -80,4 +80,14 @@ public class PlayerController : MonoBehaviour
         cc.Move(velocity * Time.deltaTime);
 
     }
+
+
+    public bool isDamageing;
+
+    public void OnDamage()
+    {
+        this.isDamageing = true;
+    }
+
+
 }
