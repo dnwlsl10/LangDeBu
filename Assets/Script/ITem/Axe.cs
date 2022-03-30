@@ -7,6 +7,8 @@ public class Axe : MonoBehaviour
     public Transform lowDamageTarget;
     public Transform highDamageTarget;
     public Enemy enemy;
+    public float damage;
+
 
 /*    private void OnTriggerEnter(Collider other)
     {

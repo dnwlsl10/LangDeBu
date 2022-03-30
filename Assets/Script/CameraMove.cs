@@ -20,6 +20,7 @@ public class CameraMove : MonoBehaviour
     public float maxDistance = 3;
     public float finalDistance;
     public float smoothness = 10f;
+    public bool isDamage;
     void Start()
     {
         this.rotX = transform.localRotation.eulerAngles.x;
@@ -34,38 +35,46 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(this.finalDistance);
-        //Debug.Log(this.dirNormalized);
-        this.rotX += Input.GetAxisRaw("Mouse Y") * this.sensitivity * Time.deltaTime;
-        this.rotY += Input.GetAxisRaw("Mouse X") * this.sensitivity * Time.deltaTime;
+        if (!isDamage)
+        {
+            //Debug.Log(this.finalDistance);
+            //Debug.Log(this.dirNormalized);
+            this.rotX += Input.GetAxisRaw("Mouse Y") * this.sensitivity * Time.deltaTime;
+            this.rotY += Input.GetAxisRaw("Mouse X") * this.sensitivity * Time.deltaTime;
 
-        rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
-        //Debug.Log(rotX);
-        Quaternion rot = Quaternion.Euler(-rotX, rotY, 0);
-        this.transform.rotation = rot;
+            rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
+            //Debug.Log(rotX);
+            Quaternion rot = Quaternion.Euler(-rotX, rotY, 0);
+            this.transform.rotation = rot;
+        }
+       
     }
 
     private void LateUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, objectToFollow.position, followSpeed * Time.deltaTime);
-        finalDir = this.transform.TransformPoint(dirNormalized * maxDistance);
-
-        RaycastHit hit;
-        /*        if(Physics.Raycast(this.transform.position, dirNormalized, out hit , maxDistance))
-                {
-
-                }*/
-
-        if (Physics.Linecast(this.transform.position, finalDir, out hit))
+        if (!isDamage)
         {
-            this.finalDistance = Mathf.Clamp(hit.distance, minDistance, maxDistance);
-        }
-        else
-        {
-            this.finalDistance = maxDistance;
-        }
+            transform.position = Vector3.MoveTowards(transform.position, objectToFollow.position, followSpeed * Time.deltaTime);
+            finalDir = this.transform.TransformPoint(dirNormalized * maxDistance);
 
-       // Debug.Log(this.finalDistance);
-        realCamera.localPosition = Vector3.Lerp(realCamera.localPosition, dirNormalized * finalDistance, Time.deltaTime * smoothness);
+            RaycastHit hit;
+            /*        if(Physics.Raycast(this.transform.position, dirNormalized, out hit , maxDistance))
+                    {
+
+                    }*/
+
+            if (Physics.Linecast(this.transform.position, finalDir, out hit))
+            {
+                this.finalDistance = Mathf.Clamp(hit.distance, minDistance, maxDistance);
+            }
+            else
+            {
+                this.finalDistance = maxDistance;
+            }
+
+            // Debug.Log(this.finalDistance);
+            realCamera.localPosition = Vector3.Lerp(realCamera.localPosition, dirNormalized * finalDistance, Time.deltaTime * smoothness);
+        }
+          
     }
 }

@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public bool isColItem;
     public System.Action<ITem, bool> OnColItem;
     public System.Action OnGetItem;
-
+    public Transform onHiDagem;
     public int maxHP = 100;
     int hp;
 

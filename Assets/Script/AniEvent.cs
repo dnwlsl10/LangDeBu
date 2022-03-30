@@ -11,6 +11,12 @@ public class AniEvent : MonoBehaviour
         this.enemy = this.GetComponent<Enemy>();
         this.ani = this.GetComponent<Animator>();
     }
+
+    void StartAttack()
+    {
+       
+    }
+
     void OnAttack()
     {
         enemy.OnAttack01_Finished();
@@ -23,11 +29,16 @@ public class AniEvent : MonoBehaviour
 
     void OnAttackFinished()
     {
-
+        enemy.OnAttackFinished();
     }
 
     void OnShoutFinished()
     {
-       
+        enemy.isShout = false;
+    }
+
+    void OnTranscriber()
+    {
+        enemy.OnTranscriber();
     }
 }

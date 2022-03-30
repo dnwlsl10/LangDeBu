@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 8cb1737b9ba7be94cae76c116df1e67c, type: 2}
+--- !u!4 &11985971 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6190442255418170458, guid: 681abd4bdc45df847b6d043c3b2d1ba1, type: 3}
+  m_PrefabInstance: {fileID: 8600633119971125593}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &16963843
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,6 +589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bag: {fileID: 1266938057}
   isColItem: 1
+  onHiDagem: {fileID: 0}
   maxHP: 100
   sliderHP: {fileID: 2131859316}
   sliderMP: {fileID: 1221732877}
@@ -2551,6 +2557,7 @@ MonoBehaviour:
   maxDistance: 2
   finalDistance: 0
   smoothness: 10
+  isDamage: 0
 --- !u!1 &1266938055
 GameObject:
   m_ObjectHideFlags: 0
@@ -3484,6 +3491,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1924443970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1924443971}
+  m_Layer: 0
+  m_Name: transcriberTrans
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1924443971
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924443970}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 11985971}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1941094211
 GameObject:
   m_ObjectHideFlags: 0
@@ -3683,6 +3720,18 @@ PrefabInstance:
       propertyPath: sliderMP
       value: 
       objectReference: {fileID: 1221732877}
+    - target: {fileID: 6190442255418065022, guid: 681abd4bdc45df847b6d043c3b2d1ba1, type: 3}
+      propertyPath: onHiDagem
+      value: 
+      objectReference: {fileID: 1924443971}
+    - target: {fileID: 6190442255418065023, guid: 681abd4bdc45df847b6d043c3b2d1ba1, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190442255418065023, guid: 681abd4bdc45df847b6d043c3b2d1ba1, type: 3}
+      propertyPath: gravity
+      value: -50
+      objectReference: {fileID: 0}
     - target: {fileID: 6190442255418065023, guid: 681abd4bdc45df847b6d043c3b2d1ba1, type: 3}
       propertyPath: UIinventory
       value: 
