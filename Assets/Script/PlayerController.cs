@@ -79,6 +79,12 @@ public class PlayerController : MonoBehaviour
 
         cc.Move(velocity * Time.deltaTime);
 
+
+        //ÁÂ¿ì È¸Àü
+        float q = Input.GetAxis("QE");
+        transform.Rotate(Vector3.up, q * 0.3f * 360 * Time.deltaTime);
+
+
     }
 
 

@@ -17,7 +17,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void CreateEnemy()
     {
-        this.enemy = Instantiate<Enemy>(this.enemyPrefab, this.spawnTarget);
+        this.enemy = Instantiate<Enemy>(this.enemyPrefab);
+        this.enemy.transform.position = spawnTarget.position;
         this.enemySpawnCount--;
     }
 
