@@ -921,7 +921,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349021758}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.47, z: 0.96}
+  m_LocalPosition: {x: 1, y: 0.238, z: 0.642}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 11985971}
@@ -2001,7 +2001,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964788311}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0.47, z: 0.96}
+  m_LocalPosition: {x: -1, y: 0.238, z: 0.642}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 11985971}
@@ -2870,7 +2870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTarget: {fileID: 211974256}
-  enemyPrefab: {fileID: 792656738920469398, guid: 539c3bcd91efba648ad571c7fa43735b, type: 3}
+  enemyPrefab: {fileID: 9062405970445469659, guid: 539c3bcd91efba648ad571c7fa43735b, type: 3}
 --- !u!1 &1488889657
 GameObject:
   m_ObjectHideFlags: 0
@@ -3207,7 +3207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bfb479c133a53a46bf9beaccb4215a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicBallFactory: {fileID: 8546802032407264895, guid: da2d8fc0d8d7e7540b4701a9e81866bc, type: 3}
+  magicBallFactory: {fileID: 6086110518314257426, guid: d47ede5f3c014bf4aa667a68b9a237ab, type: 3}
   targetPosition1: {fileID: 964788311}
   targetPosition2: {fileID: 2057042537}
   targetPosition3: {fileID: 349021758}
@@ -3702,7 +3702,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057042537}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.47, z: 0.96}
+  m_LocalPosition: {x: 0, y: 0.238, z: 0.642}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 11985971}

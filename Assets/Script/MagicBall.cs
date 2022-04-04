@@ -22,9 +22,9 @@ public class MagicBall : MonoBehaviour
     {
         //if(name.Contains("1"))
 
-        for (float t = 0; t <= 1; t += Time.deltaTime)
+        for (float t = 0; t <= 1.8f; t += Time.deltaTime)
         {
-            transform.position += Vector3.up * 1 * Time.deltaTime;
+            transform.position += Vector3.up * 0.8f * Time.deltaTime;
             yield return 0;
         }
     }
@@ -37,13 +37,12 @@ public class MagicBall : MonoBehaviour
 
         for (float t = 0; t <= 2.5f; t += Time.deltaTime)
         {
-
             GameObject target = GameObject.FindWithTag("Barbarian");
             if (target != null)
             {
                 Vector3 dir = target.transform.position - transform.position;
+                transform.position += dir * 3 * Time.deltaTime;
                 dir.Normalize();
-                transform.position += dir * 2 * Time.deltaTime;
                 yield return 0;
             }
             else
@@ -72,13 +71,9 @@ public class MagicBall : MonoBehaviour
     {
         if (other.gameObject != null)
         {
+
             if (other.gameObject.name.Contains("Barbarian"))
             {
-                // 이펙트를 생성한다.
-                //GameObject effect = Instantiate(effectPrefabs);
-                //effect.transform.position = other.gameObject.transform.position;
-                //effect.transform.forward = other.gameObject.transform.forward;
-
 
                 EnemyHP ehp = other.gameObject.GetComponent<EnemyHP>();
                 ehp.HP--;
@@ -86,8 +81,15 @@ public class MagicBall : MonoBehaviour
                 if (ehp.HP <= 0)
                 {
                     Destroy(other.gameObject);
+
+
                 }
                 Destroy(this.gameObject);
+                //이펙트를 생성한다.
+                GameObject effect = Instantiate(effectPrefabs);
+                effect.transform.position = other.gameObject.transform.position;
+                effect.transform.forward = other.gameObject.transform.forward;
+
             }
         }
     }
