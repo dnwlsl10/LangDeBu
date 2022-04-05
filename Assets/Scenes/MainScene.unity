@@ -1342,6 +1342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 2
+  rayTarget: {fileID: 1051173090}
 --- !u!1 &534805547
 GameObject:
   m_ObjectHideFlags: 0
@@ -2091,6 +2092,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1051173090 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6190442255418170830, guid: 681abd4bdc45df847b6d043c3b2d1ba1, type: 3}
+  m_PrefabInstance: {fileID: 8600633119971125593}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1067880269
 GameObject:
   m_ObjectHideFlags: 0

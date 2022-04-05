@@ -4,18 +4,31 @@ using UnityEngine;
 
 public class SwordRay : MonoBehaviour
 {
+
+    private Animator ani;
     RaycastHit hitInfo;
     public float maxDistance = 3;
+    bool isAttack;
+    public Transform rayTarget;
 
+    private void Start()
+    {
+        this.ani = this.GetComponentInParent<Animator>();
+    }
     // Update is called once per frame
     void Update()
     {
-        //마우스 왼쪽 버튼을 누르면 광선검이 나간다.
-        if (Input.GetMouseButtonDown(0))
+  
+            //마우스 왼쪽 버튼을 누르면 광선검이 나간다.
+     if (Input.GetMouseButtonDown(0) && !isAttack)
         {
 
-            Debug.DrawRay(transform.position, transform.up * maxDistance, Color.blue, 1);
-            if (Physics.Raycast(transform.position, transform.up, out hitInfo, maxDistance))
+                isAttack = true;
+            this.ani.SetTrigger("Attack");
+
+
+            Debug.DrawRay(rayTarget.position, transform.forward * maxDistance, Color.blue, 1);
+            if (Physics.Raycast(rayTarget.position, transform.forward, out hitInfo, maxDistance))
             {
                 hitInfo.transform.GetComponent<BoxCollider>();
                 print("레이가 적용되었다");
@@ -31,6 +44,11 @@ public class SwordRay : MonoBehaviour
                     }
                 }
 
+
+                //애니메이터 Set트리거 Attack 
+
+
+
                 //if (hitInfo.collider.gameObject.Tag =="Barbarian")
                 //if (hitInfo.collider.gameObject.CompareTag("Barbarian"))
                 //{
@@ -44,8 +62,21 @@ public class SwordRay : MonoBehaviour
                 //        print("적이 칼을 맞고 사망했다");
                 //    }
                 //}
+
+
             }
+            StartCoroutine(OnisAttack());
+          
+       
         }
+    }
+
+
+    IEnumerator OnisAttack()
+    {
+        yield return new WaitForSeconds(2f);
+        isAttack = false;
+
     }
     private void OnTriggerEnter(Collider other)
     {
