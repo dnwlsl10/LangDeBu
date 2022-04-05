@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
+
+    // 기존 작업
     public Inventory bag;
     public bool isColItem;
     public System.Action<ITem, bool> OnColItem;

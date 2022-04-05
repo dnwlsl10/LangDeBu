@@ -7,7 +7,7 @@ public class SwordRay : MonoBehaviour
 
     private Animator ani;
     RaycastHit hitInfo;
-    public float maxDistance = 3;
+    public float maxDistance = 5;
     bool isAttack;
     public Transform rayTarget;
 
@@ -24,11 +24,12 @@ public class SwordRay : MonoBehaviour
         {
 
                 isAttack = true;
-            this.ani.SetTrigger("Attack");
+            // AttackRight(합치기)
+            this.ani.SetTrigger("AttackRight");
 
 
-            Debug.DrawRay(rayTarget.position, transform.forward * maxDistance, Color.blue, 1);
-            if (Physics.Raycast(rayTarget.position, transform.forward, out hitInfo, maxDistance))
+            Debug.DrawRay(rayTarget.position, transform.up * maxDistance, Color.blue, 5);
+            if (Physics.Raycast(rayTarget.position, transform.up, out hitInfo, maxDistance))
             {
                 hitInfo.transform.GetComponent<BoxCollider>();
                 print("레이가 적용되었다");
